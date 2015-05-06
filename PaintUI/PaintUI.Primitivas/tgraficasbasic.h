@@ -20,16 +20,17 @@ using namespace PaintUIPrimitivas;
 
 namespace PaintUIPrimitivas{
 	enum ToolType {
-		EraserTool,
-		PencilTool,
-		SprayTool,
-		BottleTool,
+		EraserToolType,
+		PencilToolType,
+		SprayToolType,
+		BottleToolType,
 		CircleToolType,
-		SPLineTool,
+		SPLineToolType,
 		ElipseToolType,
 		LineToolType,
 		PolygonToolType,
 	};
+	
 	struct Color {
 		unsigned char r, g, b;
 		bool operator == (const Color &c2){
@@ -53,8 +54,8 @@ void setColor(float r, float g, float b);
 void setColor(Color c);
 void setDefaultColor();
 Color getColor(int x, int y);
-void getColors(const int width, const int height, Color colors[]);
-void setColors(Color colors[], const int widht, const  int height);
+void getColors(const int width, const int height, void* colors);
+void setColors(void* colors, const int widht, const  int height);
 void printColor(Color c);
 void drawPixel(int x, int y);
 void drawPixel(Punto p);
@@ -72,6 +73,7 @@ float Distancia(Punto p1, Punto p2);
 float Angulo(Punto p1, Punto p2);
 float RandomAngle();
 float Randomradius(float maxR);
+void flush();
 
 
 

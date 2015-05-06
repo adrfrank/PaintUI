@@ -57,3 +57,9 @@ void LineTool::MouseMove(int x, int y){
 void LineTool::MouseMove(Punto p){
 	MouseMove(p.x, p.y);
 }
+
+void LineTool::draw(){
+	if (draging){
+		Line::draw();
+	}
+}

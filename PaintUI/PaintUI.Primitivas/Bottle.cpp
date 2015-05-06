@@ -24,35 +24,43 @@ void Bottle::Paint(Punto p, Color c){
 }
 
 void Bottle::Paint(Punto p){
-	vector<Color> colors(width*height);
-	getColors(width, height, colors.data());
-	Color fondo = colors[p.y*width + p.x];
+	p.y = height - p.y -1;
+	width = 500;
+	Color* colors;
+	colors = new Color[width*height];
+	getColors(width, height, colors);
+	Color fondo = colors[(long)p.y*(long)width + (long)p.x];
 	queue<Punto> colapuntos;
 	colapuntos.push(p);
 	while (colapuntos.size() > 0){
 		Punto punto = colapuntos.front();
 		colapuntos.pop();
-		Color c = colors[punto.y*width + punto.x];
+		Color c = colors[(long)punto.y*(long)width + (long)punto.x];
 		if (fondo == c && c != defaultColor){
-			colors[punto.y*width + punto.x] = defaultColor;//pintar
+			colors[(long)punto.y*(long)width + (long)punto.x] = defaultColor;//pintar
 			punto.x++;
-			if (punto.x >= 0 && punto.x < width){
+			if (punto.x >= 0 && punto.x < width && punto.y < height && punto.y >= 0){
 				colapuntos.push(punto);
 			}
 			punto.x -= 2;
-			if (punto.x >= 0 && punto.x < width){
+			if (punto.x >= 0 && punto.x < width && punto.y < height && punto.y >= 0){
 				colapuntos.push(punto);
 			}
 			punto.x++;
 			punto.y++;
-			if (punto.y < height && punto.y >= 0){
+			if (punto.y < height && punto.y >= 0 && punto.y < height && punto.y >= 0){
 				colapuntos.push(punto);
 			}
 			punto.y -= 2;
-			if (punto.y < height && punto.y >= 0){
+			if (punto.y< height && punto.y >= 0 && punto.y < height && punto.y >= 0){
 				colapuntos.push(punto);
 			}
 		}
 	}
-	setColors(colors.data(), width, height);
+	setColors(colors, width, height);
+}
+
+
+void BottleTool::MouseUp(Punto p){
+	Paint(p);
 }

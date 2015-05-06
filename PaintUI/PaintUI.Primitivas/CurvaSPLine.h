@@ -11,6 +11,15 @@ namespace PaintUIPrimitivas{
 		void draw();
 		void reset();
 	};
+
+	class CurvaSPLineTool :public CurvaSPLine, public ToolControl{
+	private:
+		bool pressed;
+	public:
+		virtual void MouseDown(Punto p) override;
+		virtual void MouseUp(Punto p) override;
+		virtual void MouseMove(Punto p) override;
+	};
 }
 
 #endif

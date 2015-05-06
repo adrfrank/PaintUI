@@ -48,7 +48,13 @@ namespace OpenGLForm
 			circle = new CircleTool;
 			elipse = new ElipseTool;
 			polygon = new PolygonTool;
-
+			spline = new CurvaSPLineTool;
+			pencil = new PencilTool;
+			eraser = new EraserTool;
+			spray = new SprayTool;
+			bottle = new BottleTool;
+			bottle->width = width;
+			bottle->height = height;
 			if(m_hDC)
 			{
 				MySetPixelFormat(m_hDC);
@@ -62,7 +68,7 @@ namespace OpenGLForm
 		{
 				glClear(GL_COLOR_BUFFER_BIT);
 				glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
-				setColor(primary);
+				setColor(primarycolor ? primary : secondary);
 				switch (activeTool)
 				{
 					case LineToolType:
@@ -77,11 +83,22 @@ namespace OpenGLForm
 					case PolygonToolType:
 						polygon->draw();
 						break;
+					case SPLineToolType:
+						spline->draw();
+						break;
+					case PencilToolType:
+						pencil->draw();
+						break;
+					case EraserToolType:
+						setColor(primarycolor ? secondary:primary);
+						eraser->draw();
+						break;
+					case SprayToolType:
+						spray->draw();
+						glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+						break;
 				}
-				
-	
-									// Decrease the rotation variable for the quad
-
+				// Decrease the rotation variable for the quad
 		
 		}
 
@@ -90,22 +107,42 @@ namespace OpenGLForm
 			SwapBuffers(m_hDC) ;
 		}
 
+		System::Void CleanCanvas(System::Void){
+			glClear(GL_COLOR_BUFFER_BIT);
+			glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+
+		}
+
 		System::Void ChangeTool(System::Int32 tool){
 			activeTool = tool;
+			switch (activeTool)
+			{
+				case SPLineToolType:
+					if (!spline)
+						spline->reset();
+					break;
+			}
 		}
+
 		System::Void ChangeSidesNumber(System::Int32 sides){
 			polygon->lados = sides;
 		}
 	private:
 		HDC m_hDC;
 		HGLRC m_hglrc;
+		//Tool list
 		LineTool *line;
 		CircleTool* circle;
 		ElipseTool* elipse;
 		PolygonTool* polygon;
-		
+		CurvaSPLineTool* spline;
+		PencilTool* pencil;
+		EraserTool* eraser;
+		BottleTool* bottle;
+		SprayTool* spray;
 		Boolean draging;
 		int activeTool;
+		bool primarycolor;
 	protected:
 		~COpenGL(System::Void)
 		{
@@ -173,9 +210,12 @@ namespace OpenGLForm
 		{
 			srand(time(NULL));
 			glClearColor(1.0, 1.0, 1.0, 0.0); // se establece el color de la ventana de visualización
+
 			glMatrixMode(GL_PROJECTION); // proyección ortogonal en una zona rectangular bidimensional
 			glClear(GL_COLOR_BUFFER_BIT);
 			glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+			
+
 			//glutSwapBuffers();
 			//glReadPixels( 0.0, 0.0,wSizeX,wSizeY,GL_RGB,GL_UNSIGNED_BYTE,colorArray);
 			return TRUE;										// Initialisation went ok
@@ -200,7 +240,8 @@ namespace OpenGLForm
 			glLoadIdentity();									// Reset The Modelview Matrix
 
 			colorArray.resize(width*height, 1.0);
-
+			bottle->width = width;
+			bottle->height = height;
 			glViewport(0, 0, width, height); //NEW
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -211,6 +252,7 @@ namespace OpenGLForm
 
 		Void PanelMouseDown(Object^ sender, MouseEventArgs^ e){
 			//System::Diagnostics::Debug::WriteLine("Mouse down");
+			primarycolor = (e->Button == MouseButtons::Left);
 			Punto p(e->X, e->Y);
 			switch (activeTool){
 			case LineToolType://Mouse
@@ -225,26 +267,40 @@ namespace OpenGLForm
 			case PolygonToolType:
 				polygon->MouseDown(p);
 				break;
+			case SPLineToolType:
+				spline->MouseDown(p);
+				break;
+			case PencilToolType:
+				pencil->MouseDown(p);
+				break;
+			case EraserToolType:
+				eraser->MouseDown(p);
+				break;
+			case SprayToolType:
+				spray->MouseDown(p);
+				break;
+			
 			}
 			
 		}
 		Void PanelMouseUp(Object^ sender, MouseEventArgs^ e){
 			//System::Diagnostics::Debug::WriteLine("Mouse up");
 			Punto p(e->X, e->Y);
+			bool readpixels = TRUE;
 			switch (activeTool){
 				case LineToolType://Mouse
 					line->MouseUp(p);
 					break;
-				case CircleToolType://circle
-					circle->MouseUp(p);
+				case CircleToolType://circle					
 					glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
-					circle->draw();
+					circle->MouseUp(p);
+					readpixels = true;
 					glFlush();
 					break;
-				case ElipseToolType:
-					elipse->MouseUp(p);
+				case ElipseToolType:					
 					glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
-					elipse->draw();
+					elipse->MouseUp(p);
+					readpixels = true;
 					glFlush();
 					break;
 				case PolygonToolType:
@@ -253,7 +309,28 @@ namespace OpenGLForm
 					polygon->draw();
 					glFlush();
 					break;
+				case SPLineToolType:
+					spline->MouseUp(p);
+					if (spline->state != 3)
+						readpixels = FALSE;
+					break;
+				case PencilToolType:
+					pencil->MouseUp(p);
+					break;
+				case EraserToolType:
+					eraser->MouseUp(p);
+					break;
+				case BottleToolType:
+					bottle->defaultColor = primarycolor? primary:secondary;
+					bottle->Paint(p);
+					flush();
+					//				glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+					break;
+				case SprayToolType:
+					spray->MouseUp(p);
+					break;
 			}
+			if (readpixels)
 			glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
 			
 
@@ -262,18 +339,31 @@ namespace OpenGLForm
 			//System::Diagnostics::Debug::WriteLine("Mouse move");
 			Punto p(e->X, e->Y);
 			switch (activeTool){
-				case LineToolType://Mouse
-					line->MouseMove(p);
-					break;
-				case CircleToolType://circle
-					circle->MouseMove(p);
-					break;
-				case ElipseToolType://elipse
-					elipse->MouseMove(p);
-					break;
-				case PolygonToolType:
-					polygon->MouseMove(p);
-					break;
+			case LineToolType://Mouse
+				line->MouseMove(p);
+				break;
+			case CircleToolType://circle
+				circle->MouseMove(p);
+				break;
+			case ElipseToolType://elipse
+				elipse->MouseMove(p);
+				break;
+			case PolygonToolType:
+				polygon->MouseMove(p);
+				break;
+			case SPLineToolType:
+				spline->MouseMove(p);
+				break;
+			case PencilToolType:
+				pencil->MouseMove(p);
+				break;
+			case EraserToolType:
+				eraser->MouseMove(p);
+				break;
+			case SprayToolType:
+				spray->MouseMove(p);
+				//spray->draw();
+				break;
 			}
 		}
 	};

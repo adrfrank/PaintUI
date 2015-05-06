@@ -24,11 +24,11 @@ Color getColor(int x, int y){
 	return c;
 }
 
-void getColors(const int width, const int height, Color colors[]){
+void getColors(const int width, const int height, void* colors){
 	glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colors);
 }
 
-void setColors(Color colors[], const int widht, const  int height){
+void setColors(void* colors, const int widht, const  int height){
 	glDrawPixels(widht, height, GL_RGB, GL_UNSIGNED_BYTE, colors);
 }
 
@@ -211,4 +211,8 @@ float Randomradius(float maxR){
 	float f;
 	f = (maxR*(rand() % 1001) / 1000);
 	return f;
+}
+
+void flush(){
+	glFlush();
 }

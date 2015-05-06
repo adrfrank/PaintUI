@@ -12,6 +12,16 @@ namespace PaintUIPrimitivas{
 		void draw();
 
 	};
+
+	class EraserTool : public Eraser, public ToolControl{
+		private:
+			bool pressed = FALSE;
+		public:
+			virtual void MouseDown(Punto p) override;
+			virtual void MouseUp(Punto p) override;
+			virtual void MouseMove(Punto p) override;
+
+	};
 }
 
 

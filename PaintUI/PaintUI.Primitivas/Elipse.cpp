@@ -24,6 +24,7 @@ void Elipse::drawPolar(){
 }
 
 void Elipse::draw(){
+	
 	if (temp)
 		drawPolar();
 	else
@@ -107,8 +108,15 @@ void ElipseTool::MouseMove(Punto p){
 }
 
 void ElipseTool::MouseUp(Punto p){
-	draging = FALSE;
+	
 	rx = abs(centro.x - p.x);
 	ry = abs(centro.y - p.y);
 	temp = FALSE;
+	draw();
+	draging = FALSE;
+}
+
+void ElipseTool::draw(){
+	if (draging)
+		Elipse::draw();
 }

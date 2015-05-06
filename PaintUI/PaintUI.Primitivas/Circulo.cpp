@@ -94,7 +94,16 @@ void CircleTool::MouseMove(Punto p){
 }
 
 void CircleTool::MouseUp(Punto p){
-	draging = FALSE;
-	r = Distancia(centro, p);
+	
 	temp = FALSE;
+	r = Distancia(centro, p);
+	draw();
+	draging = FALSE;
+	
+}
+
+void CircleTool::draw(){
+	if (draging){
+		Circulo::draw();
+	}
 }

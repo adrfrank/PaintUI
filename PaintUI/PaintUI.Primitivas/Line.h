@@ -23,7 +23,7 @@ namespace PaintUIPrimitivas{
 		void MouseUp(Punto p);
 		void MouseMove(int x, int y);
 		void MouseMove(Punto p);
-
+		virtual void draw();
 	};
 }
 

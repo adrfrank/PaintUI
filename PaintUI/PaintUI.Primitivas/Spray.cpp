@@ -35,8 +35,7 @@ bool Spray::isPressed(){
 void Spray::draw(){
 	if (DEBUG)
 		cout << "-";
-	setColor(0.0, 0.0, 1.0);
-	if (!puntos.empty()){
+	if (!puntos.empty() && isPressed()){
 		float r, a;
 		Punto p, c = puntos[0];
 		for (int i = 0; i < density; ++i){
@@ -45,6 +44,21 @@ void Spray::draw(){
 			p = polar(c.x, c.y, (int)r, a);
 			drawPixel(p);
 		}
-
 	}
+}
+
+void SprayTool::MouseDown(Punto p){
+	startPresded();
+	nextPoint(p);
+}
+
+void SprayTool::MouseMove(Punto p){
+	if (isPressed()){
+		nextPoint(p);
+	}
+
+}
+
+void SprayTool::MouseUp(Punto p){
+	endPressed();
 }

@@ -34,7 +34,6 @@ namespace PaintUIPrimitivas{
 	}
 
 	void CurvaSPLine::draw(){
-		setDefaultColor();
 		double time;
 		Punto p;
 		for (time = 0; time <= 1.0; time += 0.001){
@@ -59,5 +58,21 @@ namespace PaintUIPrimitivas{
 
 	void CurvaSPLine::reset(){
 		state = 0;
+	}
+
+	void CurvaSPLineTool::MouseDown(Punto p){
+		pressed = TRUE;
+		if (state == 3) reset();
+		setPoint(p);
+	}
+
+	void CurvaSPLineTool::MouseMove(Punto p){
+		if (pressed)
+		setMovePoint(p);
+	}
+
+	void CurvaSPLineTool::MouseUp(Punto p){
+		pressed = FALSE;
+		
 	}
 }

@@ -43,7 +43,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\OneDrive\CUCEI\Taller de Graficas\glut-3.7.6-bin\GLUT\include;D:\Documentos\Visual Studio 2013\Projects\PaintUI\PaintUI.Primitivas;$(IncludePath)</IncludePath>
+    <IncludePath>D:\OneDrive\CUCEI\Taller de Graficas\glut-3.7.6-bin\GLUT\include;D:\Projects\PaintUI\PaintUI\PaintUI.Primitivas;$(IncludePath)</IncludePath>
     <LibraryPath>D:\OneDrive\CUCEI\Taller de Graficas\glut-3.7.6-bin\GLUT\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath);$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH)</ExecutablePath>
   </PropertyGroup>

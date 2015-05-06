@@ -8,7 +8,7 @@ namespace PaintUIPrimitivas{
 			Punto centro;
 			int rx, ry;
 			bool temp = FALSE;
-			void draw();
+			virtual void draw();
 			void drawMidpoint();
 			void drawPointTranslated(Punto p);
 			void drawPolar();
@@ -20,6 +20,7 @@ namespace PaintUIPrimitivas{
 		virtual void MouseDown(Punto p) override;
 		virtual void MouseUp(Punto p) override;
 		virtual void MouseMove(Punto p) override;
+		virtual void draw() override;
 	};
 }
 #endif // ELIPSE_H

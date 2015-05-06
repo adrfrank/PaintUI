@@ -15,7 +15,6 @@ Eraser::~Eraser()
 }
 
 void Eraser::draw(){
-	setColor(0.0, 0.0, 1.0);
 	if (puntos.size() >= 2){
 		unsigned int i;
 		Punto p0, p1;
@@ -25,4 +24,20 @@ void Eraser::draw(){
 			dibujarLineaCuadrados(p0, p1, FALSE);
 		}
 	}
+}
+
+void EraserTool::MouseDown(Punto p){
+	pressed = TRUE;
+	newLine(p);
+}
+
+void EraserTool::MouseMove(Punto p){
+	if (pressed){
+		nextPoint(p);
+	}
+}
+
+void EraserTool::MouseUp(Punto p){
+	pressed = FALSE;
+
 }

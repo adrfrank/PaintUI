@@ -14,7 +14,7 @@ Pencil::~Pencil()
 }
 
 void Pencil::draw(){
-	setColor(1.0, 0.0, 1.0);
+
 	if (puntos.size() >= 2){
 		unsigned int i;
 		Punto p0, p1;
@@ -36,3 +36,18 @@ void Pencil::nextPoint(Punto p){
 }
 
 
+void PencilTool::MouseDown(Punto p){
+	pressed = TRUE;
+	newLine(p);
+}
+
+void PencilTool::MouseMove(Punto p){
+	if (pressed){
+		nextPoint(p);
+	}
+}
+
+void PencilTool::MouseUp(Punto p){
+	pressed = FALSE;
+
+}
