@@ -35,7 +35,7 @@ namespace PaintUI {
 			/*this->canvasPanel = gcnew TransparentPanel();
 			this->canvasPanel->Location = System::Drawing::Point(183, 13);
 			this->canvasPanel->Name = L"canvasPanel";
-			this->canvasPanel->Size = System::Drawing::Size(639, 436);
+			this->canvasPanel->Size = System::Drawing::Size(600, 436);
 			this->canvasPanel->TabIndex = 4;
 			this->Controls->Add(this->canvasPanel);*/
 			this->canvasPanel->BackColor = System::Drawing::Color::FromArgb(0, System::Drawing::Color::Black);
@@ -108,6 +108,7 @@ namespace PaintUI {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(ToolsWindow::typeid));
 			this->dlgColor = (gcnew System::Windows::Forms::ColorDialog());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -130,10 +131,8 @@ namespace PaintUI {
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->btnNew = (gcnew System::Windows::Forms::Button());
-			//
-			//
-			this->canvasPanel = (gcnew TransparentPanel());
 			//this->canvasPanel = (gcnew System::Windows::Forms::Panel());
+			this->canvasPanel = (gcnew TransparentPanel());
 			this->dlgOpenFile = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->dlgSaveFile = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->tableLayoutPanel1->SuspendLayout();
@@ -170,143 +169,143 @@ namespace PaintUI {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.28163F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.28163F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.31019F)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(164, 204);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(164, 250);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// button1
 			// 
+			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
 			this->button1->Location = System::Drawing::Point(3, 3);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 22);
+			this->button1->Size = System::Drawing::Size(76, 29);
 			this->button1->TabIndex = 0;
-			this->button1->Text = L"Linea";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &ToolsWindow::button1_OnClick);
 			// 
 			// button2
 			// 
+			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
 			this->button2->Location = System::Drawing::Point(85, 3);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 22);
+			this->button2->Size = System::Drawing::Size(76, 29);
 			this->button2->TabIndex = 1;
-			this->button2->Text = L"Circulo";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &ToolsWindow::button2_OnClick);
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(3, 32);
+			this->button3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.Image")));
+			this->button3->Location = System::Drawing::Point(3, 38);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 22);
+			this->button3->Size = System::Drawing::Size(76, 29);
 			this->button3->TabIndex = 2;
-			this->button3->Text = L"Elipse";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &ToolsWindow::button3_Click);
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(85, 32);
+			this->button4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.Image")));
+			this->button4->Location = System::Drawing::Point(85, 38);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 22);
+			this->button4->Size = System::Drawing::Size(75, 29);
 			this->button4->TabIndex = 3;
-			this->button4->Text = L"Triangulo";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &ToolsWindow::button4_Click);
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(3, 61);
+			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
+			this->button5->Location = System::Drawing::Point(3, 73);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 22);
+			this->button5->Size = System::Drawing::Size(76, 29);
 			this->button5->TabIndex = 4;
-			this->button5->Text = L"Cuadrado";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &ToolsWindow::button5_Click);
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(85, 61);
+			this->button6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button6.Image")));
+			this->button6->Location = System::Drawing::Point(85, 73);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(75, 22);
+			this->button6->Size = System::Drawing::Size(76, 29);
 			this->button6->TabIndex = 5;
-			this->button6->Text = L"Pentágono";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &ToolsWindow::button6_Click);
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(3, 90);
+			this->button7->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button7.Image")));
+			this->button7->Location = System::Drawing::Point(3, 108);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(75, 22);
+			this->button7->Size = System::Drawing::Size(76, 29);
 			this->button7->TabIndex = 6;
-			this->button7->Text = L"Hexágono";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &ToolsWindow::button7_Click);
 			// 
 			// button8
 			// 
-			this->button8->Location = System::Drawing::Point(85, 90);
+			this->button8->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button8.Image")));
+			this->button8->Location = System::Drawing::Point(85, 108);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(75, 22);
+			this->button8->Size = System::Drawing::Size(76, 29);
 			this->button8->TabIndex = 7;
-			this->button8->Text = L"Heptágono";
 			this->button8->UseVisualStyleBackColor = true;
 			this->button8->Click += gcnew System::EventHandler(this, &ToolsWindow::button8_Click);
 			// 
 			// button9
 			// 
-			this->button9->Location = System::Drawing::Point(3, 119);
+			this->button9->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button9.Image")));
+			this->button9->Location = System::Drawing::Point(3, 143);
 			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(75, 22);
+			this->button9->Size = System::Drawing::Size(76, 29);
 			this->button9->TabIndex = 8;
-			this->button9->Text = L"SPLine";
 			this->button9->UseVisualStyleBackColor = true;
 			this->button9->Click += gcnew System::EventHandler(this, &ToolsWindow::button9_Click);
 			// 
 			// button10
 			// 
-			this->button10->Location = System::Drawing::Point(85, 119);
+			this->button10->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button10.Image")));
+			this->button10->Location = System::Drawing::Point(85, 143);
 			this->button10->Name = L"button10";
-			this->button10->Size = System::Drawing::Size(75, 22);
+			this->button10->Size = System::Drawing::Size(76, 29);
 			this->button10->TabIndex = 9;
-			this->button10->Text = L"Pencil";
 			this->button10->UseVisualStyleBackColor = true;
 			this->button10->Click += gcnew System::EventHandler(this, &ToolsWindow::button10_Click);
 			// 
 			// button11
 			// 
-			this->button11->Location = System::Drawing::Point(3, 148);
+			this->button11->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button11.Image")));
+			this->button11->Location = System::Drawing::Point(3, 178);
 			this->button11->Name = L"button11";
-			this->button11->Size = System::Drawing::Size(75, 23);
+			this->button11->Size = System::Drawing::Size(76, 29);
 			this->button11->TabIndex = 10;
-			this->button11->Text = L"Eraser";
 			this->button11->UseVisualStyleBackColor = true;
 			this->button11->Click += gcnew System::EventHandler(this, &ToolsWindow::button11_Click);
 			// 
 			// button12
 			// 
-			this->button12->Location = System::Drawing::Point(85, 148);
+			this->button12->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button12.Image")));
+			this->button12->Location = System::Drawing::Point(85, 178);
 			this->button12->Name = L"button12";
-			this->button12->Size = System::Drawing::Size(75, 23);
+			this->button12->Size = System::Drawing::Size(76, 29);
 			this->button12->TabIndex = 11;
-			this->button12->Text = L"Bottle";
 			this->button12->UseVisualStyleBackColor = true;
 			this->button12->Click += gcnew System::EventHandler(this, &ToolsWindow::butto12_click);
 			// 
 			// button13
 			// 
-			this->button13->Location = System::Drawing::Point(3, 177);
+			this->button13->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button13.Image")));
+			this->button13->Location = System::Drawing::Point(3, 213);
 			this->button13->Name = L"button13";
-			this->button13->Size = System::Drawing::Size(75, 23);
+			this->button13->Size = System::Drawing::Size(76, 34);
 			this->button13->TabIndex = 12;
-			this->button13->Text = L"Spray";
 			this->button13->UseVisualStyleBackColor = true;
 			this->button13->Click += gcnew System::EventHandler(this, &ToolsWindow::button13_Click);
 			// 
 			// label1
 			// 
 			this->label1->BackColor = System::Drawing::Color::Black;
-			this->label1->Location = System::Drawing::Point(15, 283);
+			this->label1->Location = System::Drawing::Point(12, 339);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(75, 29);
 			this->label1->TabIndex = 2;
@@ -315,7 +314,7 @@ namespace PaintUI {
 			// label2
 			// 
 			this->label2->BackColor = System::Drawing::Color::Black;
-			this->label2->Location = System::Drawing::Point(94, 283);
+			this->label2->Location = System::Drawing::Point(91, 339);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(75, 29);
 			this->label2->TabIndex = 2;
@@ -348,31 +347,31 @@ namespace PaintUI {
 			// 
 			// btnOpen
 			// 
+			this->btnOpen->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnOpen.Image")));
 			this->btnOpen->Location = System::Drawing::Point(57, 3);
 			this->btnOpen->Name = L"btnOpen";
 			this->btnOpen->Size = System::Drawing::Size(48, 34);
 			this->btnOpen->TabIndex = 1;
-			this->btnOpen->Text = L"Abrir";
 			this->btnOpen->UseVisualStyleBackColor = true;
 			this->btnOpen->Click += gcnew System::EventHandler(this, &ToolsWindow::btnOpen_Click);
 			// 
 			// btnSave
 			// 
+			this->btnSave->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSave.Image")));
 			this->btnSave->Location = System::Drawing::Point(111, 3);
 			this->btnSave->Name = L"btnSave";
 			this->btnSave->Size = System::Drawing::Size(50, 34);
 			this->btnSave->TabIndex = 2;
-			this->btnSave->Text = L"Guardar";
 			this->btnSave->UseVisualStyleBackColor = true;
 			this->btnSave->Click += gcnew System::EventHandler(this, &ToolsWindow::btnSave_Click);
 			// 
 			// btnNew
 			// 
+			this->btnNew->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnNew.Image")));
 			this->btnNew->Location = System::Drawing::Point(15, 16);
 			this->btnNew->Name = L"btnNew";
 			this->btnNew->Size = System::Drawing::Size(48, 34);
 			this->btnNew->TabIndex = 0;
-			this->btnNew->Text = L"Nuevo";
 			this->btnNew->UseVisualStyleBackColor = true;
 			this->btnNew->Click += gcnew System::EventHandler(this, &ToolsWindow::btnNew_Click);
 			// 
@@ -380,7 +379,6 @@ namespace PaintUI {
 			// 
 			this->canvasPanel->Location = System::Drawing::Point(183, 13);
 			this->canvasPanel->Name = L"canvasPanel";
-			//this->canvasPanel->Size = System::Drawing::Size(634, 436);
 			this->canvasPanel->Size = System::Drawing::Size(600, 436);
 			this->canvasPanel->TabIndex = 4;
 			// 
@@ -388,7 +386,7 @@ namespace PaintUI {
 			// 
 			this->dlgOpenFile->Filter = L"Archivos bmp (*.bmp)|*.bmp";
 			// 
-			// dlgOpenFile
+			// dlgSaveFile
 			// 
 			this->dlgSaveFile->Filter = L"Archivos bmp (*.bmp)|*.bmp";
 			// 
