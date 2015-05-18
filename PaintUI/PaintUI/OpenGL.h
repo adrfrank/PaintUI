@@ -127,6 +127,26 @@ namespace OpenGLForm
 		System::Void ChangeSidesNumber(System::Int32 sides){
 			polygon->lados = sides;
 		}
+
+		System::Void SaveFile(System::String^ path){
+			PaintUIPrimitivas::Bitmap* bmp;
+			string p = (const char *)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(path).ToPointer();
+			bmp = new PaintUIPrimitivas::Bitmap(p, width, height);
+			unsigned char* data = new unsigned char[width*height*3];
+            glReadPixels( 0.0, 0.0,width,height,0x80E0,GL_UNSIGNED_BYTE,data);
+			bmp->SetData(data);
+			bmp->Save();
+		}
+		
+		System::Void OpenFile(System::String^ path){
+			PaintUIPrimitivas::Bitmap* bmp;
+			string p = (const char *)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(path).ToPointer();
+			bmp = new PaintUIPrimitivas::Bitmap(p, width, height);
+			Punto pt = bmp->Load();
+			CleanCanvas();
+			glDrawPixels(min(pt.x,width), min(pt.y,height), 0x80E0, GL_UNSIGNED_BYTE, bmp->GetData());
+			glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+		}
 	private:
 		HDC m_hDC;
 		HGLRC m_hglrc;
@@ -294,28 +314,30 @@ namespace OpenGLForm
 				case CircleToolType://circle					
 					glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
 					circle->MouseUp(p);
-					readpixels = true;
 					glFlush();
 					break;
 				case ElipseToolType:					
 					glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
 					elipse->MouseUp(p);
-					readpixels = true;
 					glFlush();
 					break;
 				case PolygonToolType:
-					polygon->MouseUp(p);
 					glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
-					polygon->draw();
+					polygon->MouseUp(p);
 					glFlush();
 					break;
 				case SPLineToolType:
 					spline->MouseUp(p);
 					if (spline->state != 3)
 						readpixels = FALSE;
+					else{
+						glFlush();
+						spline->reset();
+					}
 					break;
 				case PencilToolType:
 					pencil->MouseUp(p);
+					glFlush();
 					break;
 				case EraserToolType:
 					eraser->MouseUp(p);
@@ -331,7 +353,7 @@ namespace OpenGLForm
 					break;
 			}
 			if (readpixels)
-			glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
+				glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colorArray.data());
 			
 
 		}

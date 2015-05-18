@@ -9,7 +9,7 @@ namespace PaintUIPrimitivas{
 		int radio=0;
 		bool temp = FALSE;
 		float anguloInicial = 0;
-		void draw();
+		virtual void draw();
 	};
 
 	class PolygonTool : public Poligono, public ToolControl{
@@ -19,6 +19,7 @@ namespace PaintUIPrimitivas{
 		virtual void MouseDown(Punto p) override;
 		virtual void MouseUp(Punto p) override;
 		virtual void MouseMove(Punto p) override;
+		virtual void draw() override;
 	};
 }
 #endif

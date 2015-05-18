@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <windows.h>
+#include "tgraficasbasic.h"
 
 
 
@@ -73,9 +74,9 @@ namespace PaintUIPrimitivas{
 		ofs.close();
 	}
 
-	void Bitmap::Load(){
+	Punto Bitmap::Load(){
 		cout << _Path << endl;
-
+		Punto p;
 		ifstream ifs(_Path.c_str(), ifstream::binary);
 
 		if (ifs.is_open()){
@@ -104,7 +105,8 @@ namespace PaintUIPrimitivas{
 			cout << " Number of important colors used: " << bih->biClrImportant << endl;
 
 			ifs.seekg(bfh->bfOffBits);
-
+			p.x = bih->biWidth;
+			p.y = bih->biHeight;
 			int size = bih->biSizeImage * 3;
 			data = new unsigned char[size];
 			ifs.read((char*)data, size);
@@ -121,6 +123,6 @@ namespace PaintUIPrimitivas{
 			cout << "Error abriendo el archivo" << endl;
 		}
 
-
+		return p;
 	}
 }

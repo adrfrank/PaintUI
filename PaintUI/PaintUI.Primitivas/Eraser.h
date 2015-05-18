@@ -9,7 +9,7 @@ namespace PaintUIPrimitivas{
 		Eraser();
 		virtual ~Eraser();
 		int tam = 10;
-		void draw();
+		virtual void draw();
 
 	};
 
@@ -20,7 +20,7 @@ namespace PaintUIPrimitivas{
 			virtual void MouseDown(Punto p) override;
 			virtual void MouseUp(Punto p) override;
 			virtual void MouseMove(Punto p) override;
-
+			virtual void draw() override;
 	};
 }
 

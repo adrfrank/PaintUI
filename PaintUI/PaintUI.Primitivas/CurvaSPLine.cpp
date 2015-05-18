@@ -34,6 +34,7 @@ namespace PaintUIPrimitivas{
 	}
 
 	void CurvaSPLine::draw(){
+		if (state == 0) return;
 		double time;
 		Punto p;
 		for (time = 0; time <= 1.0; time += 0.001){

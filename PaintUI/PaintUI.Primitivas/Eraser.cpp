@@ -41,3 +41,9 @@ void EraserTool::MouseUp(Punto p){
 	pressed = FALSE;
 
 }
+
+
+void EraserTool::draw(){
+	if (pressed)
+		Eraser::draw();
+}

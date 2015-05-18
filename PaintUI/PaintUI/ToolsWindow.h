@@ -89,7 +89,7 @@ namespace PaintUI {
 	private: TransparentPanel^  canvasPanel;
 	private: System::Windows::Forms::Button^  button13;
 	private: System::Windows::Forms::OpenFileDialog^ dlgOpenFile;
-
+	private: System::Windows::Forms::SaveFileDialog^ dlgSaveFile;
 
 
 
@@ -135,6 +135,7 @@ namespace PaintUI {
 			this->canvasPanel = (gcnew TransparentPanel());
 			//this->canvasPanel = (gcnew System::Windows::Forms::Panel());
 			this->dlgOpenFile = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->dlgSaveFile = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->tableLayoutPanel2->SuspendLayout();
 			this->SuspendLayout();
@@ -379,19 +380,24 @@ namespace PaintUI {
 			// 
 			this->canvasPanel->Location = System::Drawing::Point(183, 13);
 			this->canvasPanel->Name = L"canvasPanel";
-			this->canvasPanel->Size = System::Drawing::Size(639, 436);
+			//this->canvasPanel->Size = System::Drawing::Size(634, 436);
+			this->canvasPanel->Size = System::Drawing::Size(600, 436);
 			this->canvasPanel->TabIndex = 4;
 			// 
 			// dlgOpenFile
 			// 
 			this->dlgOpenFile->Filter = L"Archivos bmp (*.bmp)|*.bmp";
 			// 
+			// dlgOpenFile
+			// 
+			this->dlgSaveFile->Filter = L"Archivos bmp (*.bmp)|*.bmp";
+			// 
 			// ToolsWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			this->ClientSize = System::Drawing::Size(834, 461);
+			this->ClientSize = System::Drawing::Size(800, 461);
 			this->Controls->Add(this->canvasPanel);
 			this->Controls->Add(this->btnNew);
 			this->Controls->Add(this->tableLayoutPanel2);
@@ -399,8 +405,8 @@ namespace PaintUI {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(850, 500);
-			this->MinimumSize = System::Drawing::Size(850, 500);
+			this->MaximumSize = System::Drawing::Size(816, 500);
+			this->MinimumSize = System::Drawing::Size(816, 500);
 			this->Name = L"ToolsWindow";
 			this->Text = L"Paint";
 			this->tableLayoutPanel1->ResumeLayout(false);
@@ -536,14 +542,17 @@ void PaintUI::ToolsWindow::btnOpen_Click(System::Object ^sender, System::EventAr
 	auto result = this->dlgOpenFile->ShowDialog();
 	if (result == System::Windows::Forms::DialogResult::OK){
 		String^ filename = dlgOpenFile->FileName;
+		OpenGL->OpenFile(filename);
 	}
 }
 
 
 void PaintUI::ToolsWindow::btnSave_Click(System::Object ^sender, System::EventArgs ^e)
 {
-	auto result = this->dlgOpenFile->ShowDialog();
+	auto result = this->dlgSaveFile->ShowDialog();
 	if (result == System::Windows::Forms::DialogResult::OK){
-		String^ filename = dlgOpenFile->FileName;
+		String^ filename = dlgSaveFile->FileName;
+		OpenGL->SaveFile(filename);
+
 	}
 }

@@ -24,11 +24,11 @@ Color getColor(int x, int y){
 	return c;
 }
 
-void getColors(const int width, const int height, void* colors){
+void getColors(int width, int height, void* colors){
 	glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colors);
 }
 
-void setColors(void* colors, const int widht, const  int height){
+void setColors(void* colors, int widht,  int height){
 	glDrawPixels(widht, height, GL_RGB, GL_UNSIGNED_BYTE, colors);
 }
 
@@ -195,7 +195,7 @@ float Angulo(Punto p1, Punto p2){
 	float ang;
 	p.x = p2.x - p1.x;
 	p.y = p2.y - p1.y;
-	ang = atan((float)p.y / p.x) * 180.0 / M_PI;
+	ang = atan2(p.y, p.x) * 180.0 / M_PI;
 
 	return ang;
 }

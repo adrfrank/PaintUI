@@ -51,3 +51,8 @@ void PencilTool::MouseUp(Punto p){
 	pressed = FALSE;
 
 }
+
+void PencilTool::draw(){
+	if (pressed)
+		Pencil::draw();
+}

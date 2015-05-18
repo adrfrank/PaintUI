@@ -1,7 +1,7 @@
 #ifndef BITMAP_H
 #define BITMAP_H
 #include <string>
-
+#include "tgraficasbasic.h"
 using namespace std;
 
 namespace PaintUIPrimitivas {
@@ -16,7 +16,7 @@ namespace PaintUIPrimitivas {
 		virtual ~Bitmap();
 		string GetPath() { return _Path; }
 		void SetPath(string val) { _Path = val; }
-		void Load();
+		Punto Load();
 		void Save();
 		unsigned char* GetData(){ return data; };
 		void SetData(unsigned char* val){ data = val; }

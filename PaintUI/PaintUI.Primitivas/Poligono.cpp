@@ -32,8 +32,15 @@ void PolygonTool::MouseMove(Punto p){
 	}
 }
 void PolygonTool::MouseUp(Punto p){
-	draging = FALSE;
 	temp = FALSE;
 	radio = (int)Distancia(centro, p);
 	anguloInicial = Angulo(centro, p);
+	draw();
+	draging = FALSE;
+}
+
+void PolygonTool::draw(){
+	if (draging){
+		Poligono::draw();
+	}
 }
